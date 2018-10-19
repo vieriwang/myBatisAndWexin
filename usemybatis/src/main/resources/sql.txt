@@ -1,0 +1,9 @@
+create table tb_area(
+	area_id int(2) not null auto_increment,
+  area_name VARCHAR(200) not null,
+  priority int(2) not null default '0',
+  create_time datetime default null,
+  last_edit_time datetime default null,
+PRIMARY key (area_id),
+unique key uk_area(area_name)
+)ENGINE=INNODB auto_increment=1 DEFAULT CHARSET=utf8;
