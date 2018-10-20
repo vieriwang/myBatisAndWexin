@@ -31,54 +31,71 @@ public class AreaServiceImpl implements IAreaService {
     @Transactional
     @Override
     public boolean insertArea(Area area) {
-        if (area != null && area.getAreaName() != null) {
-            area.setCreateTime(new Date());
-            area.setLastEditTime(new Date());
-            try {
-                areaDao.insertArea(area);
-            } catch (Exception e) {
-                throw new RuntimeException(e.getMessage());
-            }
-        } else {
+        int i;
+        //判断地区名称是否为空
+        if (area.getAreaName() == null) {
             throw new AreaException(ResultEnum.AREA_INSERT_AREANAME_EMPTY);
         }
-        return true;
+        //判断权重是否为空。
+        if (area.getPriority() == null) {
+            throw new AreaException(ResultEnum.AREA_INSERT_PRIORITY_EMPTY);
+        }
+
+        area.setCreateTime(new Date());
+        area.setLastEditTime(new Date());
+        try {
+            i = areaDao.insertArea(area);
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        if (i == 1) {
+            return true;
+        } else {
+            throw new AreaException(ResultEnum.AREA_INSERT_AREAID_INVALID);
+        }
+
     }
 
     @Transactional
     @Override
     public boolean updateArea(Area area) {
+        int i;
         if (area != null && area.getAreaName() != null) {
             area.setLastEditTime(new Date());
             try {
-                int i = areaDao.updateArea(area);
-                if (i == 0) {
-                    throw new AreaException(ResultEnum.AREA_UPDATE_ERROR);
-                }
+                i = areaDao.updateArea(area);
             } catch (Exception e) {
                 throw new RuntimeException(e.getMessage());
             }
+            if (i == 0) {
+                throw new AreaException(ResultEnum.AREA_UPDATE_ERROR);
+            } else {
+                return true;
+            }
+
         } else {
             throw new AreaException(ResultEnum.AREA_UPDATE_AREANAME_EMPTY);
         }
-        return true;
     }
 
     @Transactional
     @Override
     public boolean deleteArea(Integer areaId) {
+        int i;
         if (areaId > 0) {
             try {
-                int i = areaDao.deleteArea(areaId);
-                if (i == 0) {
-                    throw new AreaException(ResultEnum.AREA_DELETE);
-                }
+                i = areaDao.deleteArea(areaId);
             } catch (Exception e) {
                 throw new RuntimeException(e.getMessage());
             }
+            if (i == 0) {
+                throw new AreaException(ResultEnum.AREA_DELETE);
+            } else {
+                return true;
+            }
+
         } else {
             throw new AreaException(ResultEnum.AREA_DELETE_AREAID_EMPTY);
         }
-        return true;
     }
 }

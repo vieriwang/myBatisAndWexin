@@ -7,3 +7,7 @@ create table tb_area(
 PRIMARY key (area_id),
 unique key uk_area(area_name)
 )ENGINE=INNODB auto_increment=1 DEFAULT CHARSET=utf8;
+
+insert into tb_area(area_name,priority) values('东苑',1);
+
+insert into tb_area(area_name,priority) values('北苑',2);
