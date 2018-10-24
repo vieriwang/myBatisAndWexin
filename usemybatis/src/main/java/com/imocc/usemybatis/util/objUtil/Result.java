@@ -33,7 +33,6 @@ public class Result<T> {
         this.message = resultEnum.getMessage();
     }
 
-
     public Integer getCode() {
         return code;
     }

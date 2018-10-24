@@ -4,7 +4,6 @@ import com.imocc.usemybatis.entity.Area;
 import com.imocc.usemybatis.service.IAreaService;
 import com.imocc.usemybatis.util.ResultUtil;
 import com.imocc.usemybatis.util.objUtil.Result;
-import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +15,7 @@ public class AreaController {
     @Autowired
     private IAreaService areaService;
 
-    @GetMapping(value = "/getArea")
+    @GetMapping(value = "/getAreas")
     public Result getAreas(){
         return ResultUtil.success(areaService.queryArea());
     }
@@ -27,13 +26,13 @@ public class AreaController {
     }
 
     @PostMapping(value="/createArea")
-    public Result createArea(Area area){
+    public Result createArea(@RequestBody Area area){
         areaService.insertArea(area);
         return ResultUtil.success();
     }
 
     @PutMapping(value="/updateArea")
-    public Result updateArea(Area area){
+    public Result updateArea(@RequestBody Area area){
         areaService.updateArea(area);
         return ResultUtil.success();
     }
@@ -43,6 +42,4 @@ public class AreaController {
         areaService.deleteArea(id);
         return ResultUtil.success();
     }
-
-
 }

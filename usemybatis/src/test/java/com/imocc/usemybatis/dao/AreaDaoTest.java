@@ -42,7 +42,6 @@ public class AreaDaoTest {
         area.setLastEditTime(new Date());
         int id = areaDao.insertArea(area);
         assertNotEquals(id,0);
-
     }
 
     @Test

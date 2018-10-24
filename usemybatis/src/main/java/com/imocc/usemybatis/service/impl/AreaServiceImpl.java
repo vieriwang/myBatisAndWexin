@@ -40,7 +40,6 @@ public class AreaServiceImpl implements IAreaService {
         if (area.getPriority() == null) {
             throw new AreaException(ResultEnum.AREA_INSERT_PRIORITY_EMPTY);
         }
-
         area.setCreateTime(new Date());
         area.setLastEditTime(new Date());
         try {
@@ -72,7 +71,6 @@ public class AreaServiceImpl implements IAreaService {
             } else {
                 return true;
             }
-
         } else {
             throw new AreaException(ResultEnum.AREA_UPDATE_AREANAME_EMPTY);
         }
@@ -93,7 +91,6 @@ public class AreaServiceImpl implements IAreaService {
             } else {
                 return true;
             }
-
         } else {
             throw new AreaException(ResultEnum.AREA_DELETE_AREAID_EMPTY);
         }
